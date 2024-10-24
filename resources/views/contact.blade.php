@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Contact</title>
 </head>
 <body>
-    @if (session('success')){
-        <p>{session(success)}</p>
-    }
-        <form action="{{route('contact.send')}}">
+    @if (session('success'))
+        <p>{{session(success)}}</p>
+    @endif
+        <form action="{{route('contact.send')}}" method="POST">
             @csrf
             {{-- name --}}
             <div>
@@ -38,7 +38,7 @@
             </div>
             <button type = "submit">Envoyer</button>
         </form>
-        
-    @endif
+
+
 </body>
 </html>

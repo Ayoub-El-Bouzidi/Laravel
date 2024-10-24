@@ -8,13 +8,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/home', function () {
-    return 'fmerfm';
-});
-
-Route::get('/contact', function () {
-    return 'Hello';
+    return view('home');
 });
 
 
-// Route::get('/contact', [ContactController::class, 'showForm'])->name('contact.form');
-// Route::post('/contact/send', [ContactController::class, 'sendEmail'])->name('contact.send');
+Route::get('/contact', [ContactController::class, 'showForm'])->name('contact.form');
+Route::post('/contact/send', [ContactController::class, 'sendEmail'])->name('contact.send');
