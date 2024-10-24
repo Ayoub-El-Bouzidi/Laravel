@@ -1,5 +1,7 @@
 <?php
 
+
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -14,22 +16,19 @@ class ContactController extends Controller
 
     public function sendEmail(Request $request)
     {
-        //validation des formulair
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'message' => 'required|string|max:255'
+        // Validation of form inputs
+        $data = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'text' => 'required', 
         ]);
-        $data = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'message' => $request->message
-        ];
 
-        Mail::send('emails.contact', $data, function ($message) {
-            $message->to('bozidia048@gmail.com', 'Dar Ayoub')
-                ->subject('huhuh');
+        // Sending the email
+        Mail::raw("Nom: {$data['name']}\nEmail: {$data['email']}\nMessage: {$data['text']}", function ($message) use ($data) {
+            $message->to('bozidia048@gmail.com');
         });
-        back()->redirect()->with('success', 'bravo');
+
+        // Redirect back with success message
+        return redirect()->back()->with('success', 'Bravo! Votre message a été envoyé.');
     }
 }
